@@ -158,6 +158,12 @@ namespace MuonhoryoLibrary.Serialization
                         }
                         symbolCount += line.Length + 1;
                     }
+                    Encoding encoding;
+                    using(StreamReader str=new StreamReader(path))
+                    {
+                        encoding = str.CurrentEncoding;
+                        str.Close();
+                    }
                     using FileStream stream = new FileStream(path, FileMode.Open);
                     foreach (Pair<int, int> item in diapasons)
                     {
@@ -165,7 +171,7 @@ namespace MuonhoryoLibrary.Serialization
                         stream.Seek(item.first, SeekOrigin.Begin);
                         stream.Read(array, 0, array.Length);
                         var keyValuePair = serializator.Deserialize<Pair<TKey, TValue>>
-                            (Encoding.GetEncoding(path).GetString(array)+"}");
+                            (encoding.GetString(array)+"}");
                         if (!deserializedDictionary.ContainsKey(keyValuePair.first))
                         {
                             deserializedDictionary.Add(new KeyValuePair<TKey, TValue>(keyValuePair.first, keyValuePair.second));
