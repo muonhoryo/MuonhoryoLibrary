@@ -22,7 +22,7 @@ namespace MuonhoryoLibrary.Serialization
         private const string EndText = "\"End\":\"\"";
 
         [Serializable]
-        private struct Pair<T1, T2>
+        public struct Pair<T1, T2>
         {
             public Pair(T1 first, T2 second)
             {
