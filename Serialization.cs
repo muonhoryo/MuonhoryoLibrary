@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using MuonhoryoLibrary.Exceptions;
 
 namespace MuonhoryoLibrary.Serialization
 {
@@ -124,7 +123,7 @@ namespace MuonhoryoLibrary.Serialization
                     bool arrayIsOpen = false;
                     int start = -1;
                     int symbolCount = 0;
-                    List<Pair<int, int>> diapasons = new List<Pair<int, int>> { };
+                    LinkedList<Pair<int, int>> diapasons = new LinkedList<Pair<int, int>> { };
                     foreach (string line in File.ReadLines(path))
                     {
                         if (arrayIsOpen)
@@ -144,7 +143,7 @@ namespace MuonhoryoLibrary.Serialization
                                 if (i != -1)
                                 {
                                     i += symbolCount;
-                                    diapasons.Add(new Pair<int, int>(start, i));
+                                    diapasons.AddLast(new Pair<int, int>(start, i));
                                     start = -1;
                                 }
                             }
