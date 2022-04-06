@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms.cs" />
+    <Compile Include="Collections.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="PathFinding.cs" />
