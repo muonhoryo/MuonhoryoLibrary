@@ -245,6 +245,38 @@ namespace MuonhoryoLibrary.Collections
             }
             InternalRemoveAtIndex(index);
         }
+        /// <summary>
+        /// Remove first matching element.
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public bool RemoveAtPredicate(Predicate<T> predicate)
+        {
+            if(predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+            if (predicate(Head.Value))
+            {
+                InternalRemoveFirst();
+                return true;
+            }
+            else
+            {
+                SingleLinkedListNode node = Head;
+                while(node.Next != null)
+                {
+                    if (predicate(node.Next.Value))
+                    {
+                        InternalRemoveAfter(node);
+                        return true;
+                    }
+                    node= node.Next;
+                }
+                return false;
+            }
+        }
         public void RemoveAfter(SingleLinkedListNode item)
         {
             ValidateNode(item);
