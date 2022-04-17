@@ -67,6 +67,16 @@ namespace MuonhoryoLibrary.Serialization
                 return serializedDict.ToString();
             }
 
+            public static void WriteOrCreateNewFile<TKey,TValue>(string path,Dictionary<TKey,TValue> dictionary,
+                ISerializator serializator)
+            {
+                if (!File.Exists(path))
+                {
+                    using FileStream stream = File.Create(path);
+                    stream.Close();
+                }
+                Write(path, dictionary, serializator);
+            }
             /// <summary>
             /// Serialize dictionary and write(with overwritting) in file on the path.
             /// </summary>
@@ -102,6 +112,21 @@ namespace MuonhoryoLibrary.Serialization
                 return deserializedDictionary;
             }
 
+            public static Dictionary<TKey,TValue> ReadOrCreateNewFile<TKey,TValue>(string path,
+                ISerializator serializator)
+            {
+                Dictionary<TKey, TValue> deserializedDictionary = new Dictionary<TKey, TValue> { };
+                if (!File.Exists(path))
+                {
+                    using FileStream stream = File.Create(path);
+                    stream.Close();
+                }
+                else
+                {
+                    deserializedDictionary = Read<TKey,TValue>(path, serializator);
+                }
+                return deserializedDictionary;
+            }
             /// <summary>
             /// Return deserialized dictionary from file on the path.
             /// </summary>
@@ -113,71 +138,63 @@ namespace MuonhoryoLibrary.Serialization
             public static Dictionary<TKey, TValue> Read<TKey, TValue>(string path, ISerializator serializator)
             {
                 Dictionary<TKey, TValue> deserializedDictionary = new Dictionary<TKey, TValue> { };
-                if (!File.Exists(path))
+                bool arrayIsOpen = false;
+                int start = -1;
+                int symbolCount = 0;
+                LinkedList<Pair<int, int>> diapasons = new LinkedList<Pair<int, int>> { };
+                foreach (string line in File.ReadLines(path))
                 {
-                    using FileStream stream = File.Create(path);
-                    stream.Close();
-                }
-                else
-                {
-                    bool arrayIsOpen = false;
-                    int start = -1;
-                    int symbolCount = 0;
-                    LinkedList<Pair<int, int>> diapasons = new LinkedList<Pair<int, int>> { };
-                    foreach (string line in File.ReadLines(path))
+                    if (arrayIsOpen)
                     {
-                        if (arrayIsOpen)
+                        int i;
+                        if (start == -1)
                         {
-                            int i;
-                            if (start == -1)
+                            i = line.IndexOf("{");
+                            if (i != -1)
                             {
-                                i = line.IndexOf("{");
-                                if (i != -1)
-                                {
-                                    start = i + symbolCount;
-                                }
-                            }
-                            else
-                            {
-                                i = line.IndexOf(EndText);
-                                if (i != -1)
-                                {
-                                    i += symbolCount;
-                                    diapasons.AddLast(new Pair<int, int>(start, i));
-                                    start = -1;
-                                }
+                                start = i + symbolCount;
                             }
                         }
                         else
                         {
-                            if (line.Contains("["))
+                            i = line.IndexOf(EndText);
+                            if (i != -1)
                             {
-                                arrayIsOpen = true;
+                                i += symbolCount;
+                                diapasons.AddLast(new Pair<int, int>(start, i));
+                                start = -1;
                             }
                         }
-                        symbolCount += line.Length + 1;
                     }
-                    Encoding encoding;
-                    using(StreamReader str=new StreamReader(path))
+                    else
                     {
-                        encoding = str.CurrentEncoding;
-                        str.Close();
-                    }
-                    using FileStream stream = new FileStream(path, FileMode.Open);
-                    foreach (Pair<int, int> item in diapasons)
-                    {
-                        byte[] array = new byte[item.second - item.first];
-                        stream.Seek(item.first, SeekOrigin.Begin);
-                        stream.Read(array, 0, array.Length);
-                        var keyValuePair = serializator.Deserialize<Pair<TKey, TValue>>
-                            (encoding.GetString(array)+"}");
-                        if (!deserializedDictionary.ContainsKey(keyValuePair.first))
+                        if (line.Contains("["))
                         {
-                            deserializedDictionary.Add(new KeyValuePair<TKey, TValue>(keyValuePair.first, keyValuePair.second));
+                            arrayIsOpen = true;
                         }
                     }
-                    stream.Close();
+                    symbolCount += line.Length + 1;
                 }
+                Encoding encoding;
+                using (StreamReader str = new StreamReader(path))
+                {
+                    encoding = str.CurrentEncoding;
+                    str.Close();
+                }
+                using FileStream stream = new FileStream(path, FileMode.Open);
+                foreach (Pair<int, int> item in diapasons)
+                {
+                    byte[] array = new byte[item.second - item.first];
+                    stream.Seek(item.first, SeekOrigin.Begin);
+                    stream.Read(array, 0, array.Length);
+                    var keyValuePair = serializator.Deserialize<Pair<TKey, TValue>>
+                        (encoding.GetString(array) + "}");
+                    if (!deserializedDictionary.ContainsKey(keyValuePair.first))
+                    {
+                        deserializedDictionary.Add(new KeyValuePair<TKey, TValue>(keyValuePair.first, keyValuePair.second));
+                    }
+                }
+                stream.Close();
                 return deserializedDictionary;
             }
         }
