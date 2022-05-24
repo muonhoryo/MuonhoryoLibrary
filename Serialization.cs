@@ -151,7 +151,8 @@ namespace MuonhoryoLibrary.Serialization
                 }
                 var keyValuePair =deserializeAction(serializedDictionary.Substring
                     (start, serializedDictionary.IndexOf(Serialization.EndText, start)) + "}");
-                deserializedDictionary.Add(new KeyValuePair<TKey, TValue>(keyValuePair.first, keyValuePair.second));
+                deserializedDictionary.Add
+                    (new KeyValuePair<TKey, TValue>(keyValuePair.first, keyValuePair.second));
             }
             return deserializedDictionary;
         }

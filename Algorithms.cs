@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace MuonhoryoLibrary
 {
@@ -15,10 +16,12 @@ namespace MuonhoryoLibrary
             BeenUsed
         }
         protected OneUseAlgorithmState CurrentState=OneUseAlgorithmState.NotBeenUsed;
+
         /// <summary>
         /// After end of algorithm CurrentState must be BeenUsed.
         /// </summary>
         protected abstract void StartAlgorithm();
+
         /// <summary>
         /// If algorithm has been used or is executed,throw error.
         /// </summary>
@@ -35,7 +38,9 @@ namespace MuonhoryoLibrary
                 throw new Exception("Algorithm must be unused for this method.");
             }
         }
+
         protected abstract TResultType ReturnResult();
+
         /// <summary>
         /// If algorithm hasn't been used or is executed,throw error.
         /// </summary>

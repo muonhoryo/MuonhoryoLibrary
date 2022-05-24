@@ -5,6 +5,14 @@ namespace MuonhoryoLibrary
 {
     public static class ArrayExtensions
     {
+        /// <summary>
+        /// Return true if array contains value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static bool Contains<T>(this T[] array,T value)
         {
             if(array == null)

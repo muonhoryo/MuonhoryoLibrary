@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using MuonhoryoLibrary.Exceptions;
 
@@ -7,7 +8,8 @@ namespace MuonhoryoLibrary.PathFinding2D
     public class TwoSidedWay
     {
         private TwoSidedWay() { }
-        public TwoSidedWay(ITwoSidedPathPoint FirstPoint, ITwoSidedPathPoint SecondPoint, float WayLength)
+        public TwoSidedWay(ITwoSidedPathPoint FirstPoint, ITwoSidedPathPoint SecondPoint,
+            float WayLength)
         {
             if (FirstPoint == SecondPoint)
             {
@@ -108,7 +110,8 @@ namespace MuonhoryoLibrary.PathFinding2D
                     }
                     foreach (TwoSidedWay way in path.LastPoint.Ways)
                     {
-                        ITwoSidedPathPoint endPoint = way.FirstPoint == path.LastPoint ? way.SecondPoint : way.FirstPoint;
+                        ITwoSidedPathPoint endPoint = 
+                            way.FirstPoint == path.LastPoint ? way.SecondPoint : way.FirstPoint;
                         if (CheckedPathpoints.Contains(endPoint))
                         {
                             continue;

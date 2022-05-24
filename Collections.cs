@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -112,10 +113,7 @@ namespace MuonhoryoLibrary.Collections
             get => GetAtIndex(index);
             set => GetAtIndex(index).Value = value;
         }
-        void ICollection<T>.Add(T item)
-        {
-            AddLast(item);
-        }
+
         public void AddLast(T item)
         {
             AddLast(new SingleLinkedListNode(item));
@@ -321,84 +319,6 @@ namespace MuonhoryoLibrary.Collections
             }
             return node;
         }
-        private int InternalIndexOf(SingleLinkedListNode item)
-        {
-            if (Head.Equals(item))
-            {
-                return 0;
-            }
-            else
-            {
-                SingleLinkedListNode node = Head.Next;
-                for (int i = 1; i < count; i++)
-                {
-                    if (node.Equals(item))
-                    {
-                        return i;
-                    }
-                    node = node.Next;
-                }
-                return -1;
-            }
-        }
-        private void InternalRemoveFirst()
-        {
-            Head = Head.Next;
-            version++;
-            count--;
-        }
-        private void InternalRemoveAtIndex(int index)
-        {
-            SingleLinkedListNode node = Head;
-            for (int i = 1; i < index; i++)
-            {
-                node = node.Next;
-            }
-            InternalRemoveAfter(node);
-        }
-        private void InternalRemoveAfter(SingleLinkedListNode item)
-        {
-            if (item.Next.Next != null)
-            {
-                item.Next = item.Next.Next;
-            }
-            else
-            {
-                item.Next = null;
-            }
-            version++;
-            count--;
-        }
-        private void InternalAddAtIndex(int index,SingleLinkedListNode item)
-        {
-            SingleLinkedListNode node = Head;
-            for (int i = 1; i < index; i++)
-            {
-                node = node.Next;
-            }
-            InternalInsertAfter(node, item);
-        }
-        private void InternalInsertAfter(SingleLinkedListNode node,SingleLinkedListNode item)
-        {
-            item.Next = node.Next;
-            node.Next = item;
-            count++;
-            version++;
-        }
-        private void ValidateNode(SingleLinkedListNode node)
-        {
-            if(node == null)
-            {
-                throw new ArgumentNullException("node");
-            }
-        }
-        private void ValidateIndex(int index)
-        {
-            if (index >= count||index<0)
-            {
-                throw new ArgumentOutOfRangeException("index");
-            }
-        }
         public void Clear()
         {
             Head = null;
@@ -486,9 +406,92 @@ namespace MuonhoryoLibrary.Collections
         {
             return new SingleLinkedListEnumerator(this);
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new SingleLinkedListEnumerator(this);
+        }
+        void ICollection<T>.Add(T item)
+        {
+            AddLast(item);
+        }
+        private int InternalIndexOf(SingleLinkedListNode item)
+        {
+            if (Head.Equals(item))
+            {
+                return 0;
+            }
+            else
+            {
+                SingleLinkedListNode node = Head.Next;
+                for (int i = 1; i < count; i++)
+                {
+                    if (node.Equals(item))
+                    {
+                        return i;
+                    }
+                    node = node.Next;
+                }
+                return -1;
+            }
+        }
+        private void InternalRemoveFirst()
+        {
+            Head = Head.Next;
+            version++;
+            count--;
+        }
+        private void InternalRemoveAtIndex(int index)
+        {
+            SingleLinkedListNode node = Head;
+            for (int i = 1; i < index; i++)
+            {
+                node = node.Next;
+            }
+            InternalRemoveAfter(node);
+        }
+        private void InternalRemoveAfter(SingleLinkedListNode item)
+        {
+            if (item.Next.Next != null)
+            {
+                item.Next = item.Next.Next;
+            }
+            else
+            {
+                item.Next = null;
+            }
+            version++;
+            count--;
+        }
+        private void InternalAddAtIndex(int index, SingleLinkedListNode item)
+        {
+            SingleLinkedListNode node = Head;
+            for (int i = 1; i < index; i++)
+            {
+                node = node.Next;
+            }
+            InternalInsertAfter(node, item);
+        }
+        private void InternalInsertAfter(SingleLinkedListNode node, SingleLinkedListNode item)
+        {
+            item.Next = node.Next;
+            node.Next = item;
+            count++;
+            version++;
+        }
+        private void ValidateNode(SingleLinkedListNode node)
+        {
+            if (node == null)
+            {
+                throw new ArgumentNullException("node");
+            }
+        }
+        private void ValidateIndex(int index)
+        {
+            if (index >= count || index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index");
+            }
         }
     }
 }
