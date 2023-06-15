@@ -9,18 +9,14 @@ namespace MuonhoryoLibrary
     /// <typeparam name="TResultType"></typeparam>
     public abstract class OneUseAlgorithm<TResultType>
     {
-        protected enum OneUseAlgorithmState
+        public enum OneUseAlgorithmState
         {
             NotBeenUsed,
-            PathFindInProgress,
+            AlgorithmInProgress,
             BeenUsed
         }
-        protected OneUseAlgorithmState CurrentState=OneUseAlgorithmState.NotBeenUsed;
-
-        /// <summary>
-        /// After end of algorithm CurrentState must be BeenUsed.
-        /// </summary>
-        protected abstract void StartAlgorithm();
+        public event Action<TResultType> OnEndExecuting;
+        public OneUseAlgorithmState CurrentState { get; private set; } = OneUseAlgorithmState.NotBeenUsed;
 
         /// <summary>
         /// If algorithm has been used or is executed,throw error.
@@ -30,16 +26,14 @@ namespace MuonhoryoLibrary
         {
             if (CurrentState == OneUseAlgorithmState.NotBeenUsed)
             {
-                CurrentState = OneUseAlgorithmState.PathFindInProgress;
+                CurrentState = OneUseAlgorithmState.AlgorithmInProgress;
                 ExecuteAlgorithm();
             }
             else
             {
-                throw new Exception("Algorithm must be unused for this method.");
+                throw new Exception("Algorithm has been used or is in execution progress.");
             }
         }
-
-        protected abstract TResultType ReturnResult();
 
         /// <summary>
         /// If algorithm hasn't been used or is executed,throw error.
@@ -54,8 +48,17 @@ namespace MuonhoryoLibrary
             }
             else
             {
-                throw new Exception("Algorithm must be used for this method.");
+                throw new Exception("Haven't result. Algorithm hasn't been used.");
             }
         }
+
+
+        protected abstract void StartAlgorithm();
+        protected void EndAlgorithmRunning()
+        {
+            CurrentState = OneUseAlgorithmState.BeenUsed;
+            OnEndExecuting?.Invoke(ReturnResult());
+        }
+        protected abstract TResultType ReturnResult();
     }
 }

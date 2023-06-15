@@ -4,3 +4,9 @@ C:\Users\muon1\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\Muo
 C:\Users\muon1\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.csproj.CoreCompileInputs.cache
 C:\Users\muon1\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.dll
 C:\Users\muon1\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.pdb
+C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\bin\Debug\MuonhoryoLibrary.dll
+C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\bin\Debug\MuonhoryoLibrary.pdb
+C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.dll
+C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.pdb

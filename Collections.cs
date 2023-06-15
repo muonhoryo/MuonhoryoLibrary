@@ -9,34 +9,34 @@ namespace MuonhoryoLibrary.Collections
     {
         public struct SingleLinkedListEnumerator : IEnumerator<T>
         {
-            internal SingleLinkedListEnumerator(SingleLinkedList<T> source)
+            internal SingleLinkedListEnumerator(SingleLinkedList<T> Source)
             {
-                this.source= source;
-                currentNode = null;
-                version = source.version;
-                index = 0;
+                this.Source= Source;
+                CurrentNode = null;
+                version = Source.Version;
+                Index_ = 0;
             }
-            private readonly SingleLinkedList<T> source;
-            private SingleLinkedListNode currentNode;
+            private readonly SingleLinkedList<T> Source;
+            private SingleLinkedListNode CurrentNode;
             private readonly int version;
-            public int index { get; private set; }
-            public T Current =>currentNode.Value;
-            object IEnumerator.Current =>currentNode.Value;
+            public int Index_ { get; private set; }
+            public T Current =>CurrentNode.Value;
+            object IEnumerator.Current =>CurrentNode.Value;
             public void Dispose()
             {
             }
             public bool MoveNext()
             {
-                if (version != source.version)
+                if (version != Source.Version)
                 {
                     throw new InvalidOperationException("Collection was changed.");
                 }
-                if (currentNode == null)
+                if (CurrentNode == null)
                 {
-                    if (source.count > 0)
+                    if (Source.Count > 0)
                     {
-                        index++;
-                        currentNode = source.Head;
+                        Index_++;
+                        CurrentNode = Source.Head;
                         return true;
                     }
                     else
@@ -46,26 +46,26 @@ namespace MuonhoryoLibrary.Collections
                 }
                 else
                 {
-                    if (currentNode.Next == null)
+                    if (CurrentNode.Next == null)
                     {
                         return false;
                     }
                     else
                     {
-                        currentNode = currentNode.Next;
-                        index++;
+                        CurrentNode = CurrentNode.Next;
+                        Index_++;
                         return true;
                     }
                 }
             }
             public void Reset()
             {
-                if(version != source.version)
+                if(version != Source.Version)
                 {
                     throw new InvalidOperationException("Collection was changed.");
                 }
-                currentNode = source.Head;
-                index = 0;
+                CurrentNode = Source.Head;
+                Index_ = 0;
             }
         }
         public sealed class SingleLinkedListNode
@@ -89,12 +89,12 @@ namespace MuonhoryoLibrary.Collections
         }
         public SingleLinkedList()
         {
-            count = 0;
+            Count = 0;
         }
         public SingleLinkedList(T headValue)
         {
             Head = new SingleLinkedListNode(headValue);
-            count = 1;
+            Count = 1;
         }
         public SingleLinkedList(IEnumerable<T> collection)
         {
@@ -103,11 +103,12 @@ namespace MuonhoryoLibrary.Collections
                 AddLast(item);
             }
         }
+        public int Count_ => Count;
         private SingleLinkedListNode Head;
-        private int count;
-        public int Count => count;
-        public bool IsReadOnly => false;
-        private int version=0;
+        private int Count;
+        int ICollection<T>.Count => Count_;
+        bool ICollection<T>.IsReadOnly => false;
+        private int Version=0;
         public T this[int index]
         {
             get => GetAtIndex(index);
@@ -134,23 +135,23 @@ namespace MuonhoryoLibrary.Collections
                 }
                 node.Next = item;
             }
-            version++;
-            count++;
+            Version++;
+            Count++;
         }
         public void AddFirst(T item)
         {
             SingleLinkedListNode newNode = new SingleLinkedListNode(item, Head);
             Head = newNode;
-            version++;
-            count++;
+            Version++;
+            Count++;
         }
         public void AddFirst(SingleLinkedListNode item)
         {
             ValidateNode(item);
             item.Next = Head;
             Head = item;
-            version++;
-            count++;
+            Version++;
+            Count++;
         }
         public void AddAtIndex(int index, T item)
         {
@@ -232,7 +233,7 @@ namespace MuonhoryoLibrary.Collections
         }
         public void RemoveLast()
         {
-            RemoveAtIndex(Count - 1);
+            RemoveAtIndex(Count_ - 1);
         }
         public void RemoveAtIndex(int index)
         {
@@ -289,7 +290,7 @@ namespace MuonhoryoLibrary.Collections
             else
             {
                 SingleLinkedListNode node = Head;
-                for(int i = 1; i < count; i++)
+                for(int i = 1; i < Count; i++)
                 {
                     if (node.Next.Value.Equals(item))
                     {
@@ -322,12 +323,12 @@ namespace MuonhoryoLibrary.Collections
         public void Clear()
         {
             Head = null;
-            count = 0;
-            version++;
+            Count = 0;
+            Version++;
         }
         public bool Contains(T item)
         {
-            if (count == 0)
+            if (Count == 0)
             {
                 return false;
             }
@@ -351,7 +352,7 @@ namespace MuonhoryoLibrary.Collections
         }
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (count - arrayIndex > array.Length)
+            if (Count - arrayIndex > array.Length)
             {
                 throw new IndexOutOfRangeException("Array is too small to copy.");
             }
@@ -359,13 +360,13 @@ namespace MuonhoryoLibrary.Collections
             {
                 throw new IndexOutOfRangeException("arrayIndex must be more than or equal zero");
             }
-            if (arrayIndex >= count)
+            if (arrayIndex >= Count)
             {
                 throw new IndexOutOfRangeException("arraIndex must be less than list's Count");
             }
-            array = new T[count];
+            array = new T[Count];
             SingleLinkedListNode node = Head;
-            for(int i = arrayIndex; i < count; i++)
+            for(int i = arrayIndex; i < Count; i++)
             {
                 array[i] = node;
                 node = node.Next;
@@ -373,9 +374,9 @@ namespace MuonhoryoLibrary.Collections
         }
         public T[] ToArray()
         {
-            T[] array = new T[count];
+            T[] array = new T[Count];
             SingleLinkedListNode node = Head;
-            for(int i = 0; i < count; i++)
+            for(int i = 0; i < Count; i++)
             {
                 array[i] = node;
                 node = Head.Next;
@@ -424,7 +425,7 @@ namespace MuonhoryoLibrary.Collections
             else
             {
                 SingleLinkedListNode node = Head.Next;
-                for (int i = 1; i < count; i++)
+                for (int i = 1; i < Count; i++)
                 {
                     if (node.Equals(item))
                     {
@@ -438,8 +439,8 @@ namespace MuonhoryoLibrary.Collections
         private void InternalRemoveFirst()
         {
             Head = Head.Next;
-            version++;
-            count--;
+            Version++;
+            Count--;
         }
         private void InternalRemoveAtIndex(int index)
         {
@@ -460,8 +461,8 @@ namespace MuonhoryoLibrary.Collections
             {
                 item.Next = null;
             }
-            version++;
-            count--;
+            Version++;
+            Count--;
         }
         private void InternalAddAtIndex(int index, SingleLinkedListNode item)
         {
@@ -476,8 +477,8 @@ namespace MuonhoryoLibrary.Collections
         {
             item.Next = node.Next;
             node.Next = item;
-            count++;
-            version++;
+            Count++;
+            Version++;
         }
         private void ValidateNode(SingleLinkedListNode node)
         {
@@ -488,7 +489,7 @@ namespace MuonhoryoLibrary.Collections
         }
         private void ValidateIndex(int index)
         {
-            if (index >= count || index < 0)
+            if (index >= Count || index < 0)
             {
                 throw new ArgumentOutOfRangeException("index");
             }

@@ -35,7 +35,7 @@ namespace MuonhoryoLibrary.PathFinding2D
     }
     public sealed class DextraAlgorithm:OneUseAlgorithm<ITwoSidedPathPoint[]>
     {
-        private sealed class DextraPath
+        private sealed class DextraPath:IComparable<DextraPath>
         {
             private DextraPath() { }
             public DextraPath(ITwoSidedPathPoint start)
@@ -55,8 +55,17 @@ namespace MuonhoryoLibrary.PathFinding2D
                 Length = copyiedPath.Length;
             }
             public readonly List<ITwoSidedPathPoint> Path;
-            public ITwoSidedPathPoint LastPoint => Path[Path.Count - 1];
+            public ITwoSidedPathPoint LastPoint_ => Path[Path.Count - 1];
             public readonly float Length;
+            int IComparable<DextraPath>.CompareTo(DextraPath other)
+            {
+                if (Length > other.Length)
+                    return 1;
+                else if (Length == other.Length)
+                    return 0;
+                else
+                    return -1;
+            }
         }
         private DextraAlgorithm() { }
         public DextraAlgorithm(ITwoSidedPathPoint Start, ITwoSidedPathPoint End)
@@ -76,7 +85,7 @@ namespace MuonhoryoLibrary.PathFinding2D
         {
             for (int i = 0; i < Paths.Count; i++)
             {
-                if (Paths[i].LastPoint == point)
+                if (Paths[i].LastPoint_ == point)
                 {
                     return i;
                 }
@@ -86,32 +95,18 @@ namespace MuonhoryoLibrary.PathFinding2D
         private void CheckPoints()
         {
             {
-                Paths.Sort(delegate (DextraPath x, DextraPath y)
-                {
-                    if (x.Length > y.Length)
-                    {
-                        return 1;
-                    }
-                    else if (x.Length == y.Length)
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                        return -1;
-                    }
-                });
+                Paths.Sort();
                 DextraPath[] pathsArray = Paths.ToArray();
                 foreach (var path in pathsArray)
                 {
-                    if (path.LastPoint == End)
+                    if (path.LastPoint_ == End)
                     {
                         continue;
                     }
-                    foreach (TwoSidedWay way in path.LastPoint.Ways)
+                    foreach (TwoSidedWay way in path.LastPoint_.Ways)
                     {
                         ITwoSidedPathPoint endPoint = 
-                            way.FirstPoint == path.LastPoint ? way.SecondPoint : way.FirstPoint;
+                            way.FirstPoint == path.LastPoint_ ? way.SecondPoint : way.FirstPoint;
                         if (CheckedPathpoints.Contains(endPoint))
                         {
                             continue;
@@ -133,31 +128,25 @@ namespace MuonhoryoLibrary.PathFinding2D
                         }
                     }
                     Paths.Remove(path);
-                    CheckedPathpoints.Add(path.LastPoint);
+                    CheckedPathpoints.Add(path.LastPoint_);
                 }
             }
             if (Paths.Count == 0)
-            {
-                CurrentState = OneUseAlgorithmState.BeenUsed;
-                FinalPathWay = null;
-            }
-            else if (Paths.Count == 1 && Paths[0].LastPoint == End)
-            {
-                CurrentState = OneUseAlgorithmState.BeenUsed;
-                FinalPathWay = Paths[0].Path.ToArray();
-            }
+                EndPathFinding(null);
+            else if (Paths.Count == 1 && Paths[0].LastPoint_ == End)
+                EndPathFinding(Paths[0].Path.ToArray());
             else
-            {
                 CheckPoints();
-            }
+        }
+        private void EndPathFinding(ITwoSidedPathPoint[] result)
+        {
+            FinalPathWay = result;
+            EndAlgorithmRunning();
         }
         protected override void StartAlgorithm()
         {
             CheckPoints();
         }
-        protected override ITwoSidedPathPoint[] ReturnResult()
-        {
-            return FinalPathWay;
-        }
+        protected override ITwoSidedPathPoint[] ReturnResult() => FinalPathWay;
     }
 }

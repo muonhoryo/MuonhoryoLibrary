@@ -17,11 +17,11 @@ namespace MuonhoryoLibrary
         {
             if(array == null)
             {
-                throw new ArgumentNullException("array cannot be null");
+                throw new ArgumentNullException("Array cannot be null");
             }
             if(value == null)
             {
-                throw new ArgumentNullException("value cannot be null");
+                throw new ArgumentNullException("Value cannot be null");
             }
             if(array.Length == 0)
             {
