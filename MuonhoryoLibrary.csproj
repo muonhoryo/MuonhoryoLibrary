@@ -43,16 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms.cs" />
-    <Compile Include="ArrayExtensions.cs" />
-    <Compile Include="Collections.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="OneUseAlgorithm.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Collections\SingleLinkedList.cs" />
     <Compile Include="CompositeParameter.cs" />
-    <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Exceptions.cs" />
-    <Compile Include="PathFinding.cs" />
-    <Compile Include="Serialization.cs" />
+    <Compile Include="DextraPathFinding.cs" />
     <Compile Include="Singltone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
