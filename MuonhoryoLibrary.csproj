@@ -43,11 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositeParameters\CompositeParameter.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="OneUseAlgorithm.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Collections\SingleLinkedList.cs" />
-    <Compile Include="CompositeParameter.cs" />
+    <Compile Include="CompositeParameters\CompositeFloat.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="DextraPathFinding.cs" />
