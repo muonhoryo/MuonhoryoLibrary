@@ -10,3 +10,9 @@ C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\Muon
 C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.dll
 C:\Users\User\Desktop\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.pdb
+D:\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\bin\Debug\MuonhoryoLibrary.dll
+D:\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\bin\Debug\MuonhoryoLibrary.pdb
+D:\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.csproj.AssemblyReference.cache
+D:\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.csproj.CoreCompileInputs.cache
+D:\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.dll
+D:\create\c#\MuonhoryoLibrary\MuonhoryoLibrary\obj\Debug\MuonhoryoLibrary.pdb

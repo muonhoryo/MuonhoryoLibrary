@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositeParameters\CompositeInteger.cs" />
     <Compile Include="CompositeParameters\CompositeParameter.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="OneUseAlgorithm.cs" />

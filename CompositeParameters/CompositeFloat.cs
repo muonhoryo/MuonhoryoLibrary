@@ -34,13 +34,13 @@ namespace MuonhoryoLibrary
             }
         }
 
-        public IConstModifier<float> AddModifier_Add(float speed)
+        public IConstModifier<float> AddModifier_Add(float modifier)
         {
-            return AddModifier(this,speed, AddersList, (item) => AddingAddModifierEvent?.Invoke(item));
+            return AddModifier(this, modifier, AddersList, (item) => AddingAddModifierEvent?.Invoke(item));
         }
-        public IConstModifier<float> AddModifier_Multiply(float speed)
+        public IConstModifier<float> AddModifier_Multiply(float modifer)
         {
-            return AddModifier(this,speed, MultipliesList, (item) => AddingMultiplyModifierEvent?.Invoke(item));
+            return AddModifier(this, modifer, MultipliesList, (item) => AddingMultiplyModifierEvent?.Invoke(item));
         }
     }
 }
