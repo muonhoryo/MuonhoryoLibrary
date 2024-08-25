@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|d:\\create\\c#\\muonhoryolibrary\\muonhoryolibrary\\compositeparameters\\compositeinteger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|solutionrelative:compositeparameters\\compositeinteger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\compositeparameters\\compositeparameter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|d:\\create\\c#\\muonhoryolibrary\\muonhoryolibrary\\compositeparameters\\compositeparameter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|solutionrelative:compositeparameters\\compositeparameter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|d:\\create\\c#\\muonhoryolibrary\\muonhoryolibrary\\compositeparameters\\compositefloat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|solutionrelative:compositeparameters\\compositefloat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|solutionrelative:properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\CompositeParameters\\CompositeFloat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|solutionrelative:CompositeParameters\\CompositeFloat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\CompositeParameters\\CompositeInteger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DBA1E7F-B542-4CB3-9413-185594837F3E}|MuonhoryoLibrary.csproj|solutionrelative:CompositeParameters\\CompositeInteger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,33 +26,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\Properties\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "Properties\\AssemblyInfo.cs",
+              "ToolTip": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\Properties\\AssemblyInfo.cs",
+              "RelativeToolTip": "Properties\\AssemblyInfo.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACMAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T12:21:09.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "CompositeParameter.cs",
               "DocumentMoniker": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\CompositeParameters\\CompositeParameter.cs",
               "RelativeDocumentMoniker": "CompositeParameters\\CompositeParameter.cs",
               "ToolTip": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\CompositeParameters\\CompositeParameter.cs",
               "RelativeToolTip": "CompositeParameters\\CompositeParameter.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAkwAoAAAASAAAA",
+              "ViewState": "AQIAAAoAAAAAAAAAAADwvyEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-08T11:16:46.245Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "CompositeInteger.cs",
               "DocumentMoniker": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\CompositeParameters\\CompositeInteger.cs",
               "RelativeDocumentMoniker": "CompositeParameters\\CompositeInteger.cs",
               "ToolTip": "D:\\create\\c#\\MuonhoryoLibrary\\MuonhoryoLibrary\\CompositeParameters\\CompositeInteger.cs",
               "RelativeToolTip": "CompositeParameters\\CompositeInteger.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAwAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAwB0AAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T11:17:30.748Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T11:17:30.748Z"
             },
             {
               "$type": "Document",
@@ -60,8 +80,7 @@
               "RelativeToolTip": "CompositeParameters\\CompositeFloat.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAACoAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T11:16:46.368Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T11:16:46.368Z"
             }
           ]
         }

@@ -6,10 +6,7 @@ using System;
 
 namespace MuonhoryoLibrary
 {
-    /// <summary>
-    /// Default value changed by add's and multiply's modifiers
-    /// </summary>
-    public abstract class CompositeParameter<TParamType>
+    public abstract class CompositeParameter
     {
         public interface IConstModifier<TParam>
         {
@@ -18,9 +15,14 @@ namespace MuonhoryoLibrary
         }
         protected sealed class ModifierHandler<TModType> : IConstModifier<TModType>
         {
-            public ModifierHandler(TModType Modifier, SingleLinkedList<ModifierHandler<TModType>> list)
+            public ModifierHandler(TModType Modifier, SingleLinkedList<ModifierHandler<TModType>> list,
+                CompositeParameter owner)
             {
-                RemoveHandlerAction = () => list.Remove(this);
+                RemoveHandlerAction = () =>
+                {
+                    list.Remove(this);
+                    owner.RecalculateValue();
+                };
                 this.Modifier = Modifier;
             }
             public readonly TModType Modifier;
@@ -28,16 +30,24 @@ namespace MuonhoryoLibrary
             TModType IConstModifier<TModType>.Modifier => Modifier;
             public void RemoveModifier() => RemoveHandlerAction();
         }
-        private CompositeParameter() { }
-        public CompositeParameter(TParamType DefaultValue)
+        protected CompositeParameter() { }
+
+        protected abstract void RecalculateValue();
+    }
+    /// <summary>
+    /// Default value changed by add's and multiply's modifiers
+    /// </summary>
+    public abstract class CompositeParameter<TParamType>:CompositeParameter
+    {
+        public CompositeParameter(TParamType DefaultValue) : base()
         {
             this.DefaultValue = DefaultValue;
-            RecalulculateValue();
+            RecalculateValue();
         }
         public readonly TParamType DefaultValue;
         public TParamType CurrentValue { get; protected set; }
         public event Action<TParamType> ValueHasBeenRecalculatedEvent;
-        private void RecalulculateValue()
+        protected sealed override void RecalculateValue()
         {
             RecalculationAction();
             ValueHasBeenRecalculatedEvent?.Invoke(CurrentValue);
@@ -51,10 +61,10 @@ namespace MuonhoryoLibrary
             Action<IConstModifier<TListParamsType>> runningEventAction)
         {
             ModifierHandler<TListParamsType> modifier =
-                new ModifierHandler<TListParamsType>(modifierValue, list);
+                new ModifierHandler<TListParamsType>(modifierValue, list,owner);
             list.AddLast(modifier);
             runningEventAction(modifier);
-            owner.RecalulculateValue();
+            owner.RecalculateValue();
             return modifier;
         }
 
